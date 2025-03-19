@@ -1,7 +1,6 @@
 package com.example.bookstore.controller;
 
 import com.example.bookstore.dto.SaleDTO;
-import com.example.bookstore.entity.Sale;
 import com.example.bookstore.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,5 +41,10 @@ public class SaleController {
     public ResponseEntity<List<SaleDTO>> findSalesByBuyerEmail(@PathVariable String buyerEmail) {
         List<SaleDTO> salesForBuyer = saleService.getAllSalesByBuyerEmail(buyerEmail);
         return ResponseEntity.ok(salesForBuyer);
+    }
+
+    @GetMapping("/totalEarnings")
+    public double findSalesByTotalEarnings() {
+        return saleService.totalEarnings();
     }
 }

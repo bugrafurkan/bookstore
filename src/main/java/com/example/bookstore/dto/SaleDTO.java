@@ -1,8 +1,6 @@
 package com.example.bookstore.dto;
 
 import com.example.bookstore.entity.Book;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import java.time.LocalDateTime;
