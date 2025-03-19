@@ -21,7 +21,7 @@ public class Book {
     private String author;
     private String publisher;
     private String isbn;
-    private BigDecimal price;
+    private double price;
     private Long stock;
     private LocalDate publishedDate;
     private String description;
@@ -37,7 +37,7 @@ public static Book fromDTO(BookDTO dto) {
     book.setPublishedDate(dto.getPublishedDate());
     book.setDescription(dto.getDescription());
     return book;
-}
+    }
 
 public BookDTO toDTO() {
     return new BookDTO(
