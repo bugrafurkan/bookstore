@@ -8,6 +8,7 @@ import com.example.bookstore.exception.ResourceNotFoundException;
 import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.repository.SaleRepository;
 import com.example.bookstore.service.SaleService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +47,7 @@ public class SaleServiceImpl implements SaleService {
     }
 
     @Override
+    @Transactional
     public SaleDTO cancelSale(Long saleId) {
         Sale sale = saleRepository.findById(saleId)
                 .orElseThrow(() -> new ResourceNotFoundException("Sale not found: " + saleId));

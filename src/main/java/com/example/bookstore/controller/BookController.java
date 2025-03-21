@@ -49,7 +49,7 @@ public class BookController {
 
     // [DELETE] /api/v1/books/{id}
     @DeleteMapping("/{id}")
-    public ResponseEntity<BookDTO>  deleteBook(@PathVariable Long id) {
+    public ResponseEntity<Void>  deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
         return ResponseEntity.noContent().build();
     }

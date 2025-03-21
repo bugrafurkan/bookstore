@@ -5,6 +5,7 @@ import com.example.bookstore.entity.Book;
 import com.example.bookstore.exception.ResourceNotFoundException;
 import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.service.BookService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public BookDTO updateBook(Long id, BookDTO dto) {
         Book updatedBook = bookRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Book not found: " + id));
