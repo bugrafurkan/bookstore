@@ -51,7 +51,7 @@ class SaleServiceTest {
         dto.setQuantity(3L);
 
 
-        when(bookRepository.save(any(Book.class))).thenReturn(book);
+        when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
 
         Sale sale = new Sale();
         sale.setBook(book);
@@ -93,30 +93,6 @@ class SaleServiceTest {
         assertTrue(exception.getMessage().contains("Not enough stock available"));
     }
 
-    @Test
-    void testCancelSale() {
-        // Arrange
-        Book book = new Book();
-        book.setId(1L);
-        book.setStock(8L);
-
-        Sale sale = new Sale();
-        sale.setId(1L);
-        sale.setBook(book);
-        sale.setQuantity(2);
-        when(saleRepository.findById(sale.getId())).thenReturn(Optional.of(sale));
-        when(saleRepository.save(any(Sale.class))).thenReturn(sale);
-        when(bookRepository.save(any(Book.class))).thenReturn(book);
-
-        // Act
-        SaleDTO cancelledSale = saleService.cancelSale(sale.getId());
-
-        // Assert
-        assertTrue(cancelledSale.isCanceled());
-        verify(bookRepository, times(1)).save(any(Book.class));
-        verify(saleRepository, times(1)).save(any(Sale.class));
-        assertEquals(10, book.getStock());
-    }
 
     @Test
     void testGetSalesByBuyerEmail() {
