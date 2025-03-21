@@ -2,6 +2,7 @@ package com.example.bookstore.service.impl;
 
 import com.example.bookstore.dto.BookDTO;
 import com.example.bookstore.entity.Book;
+import com.example.bookstore.exception.ResourceNotFoundException;
 import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDTO getBook(Long id) {
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aranan kitap bulunamadı: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Book not found: " + id));
 
         return book.toDTO();
     }
@@ -44,7 +45,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDTO updateBook(Long id, BookDTO dto) {
         Book updatedBook = bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aranan kitap bulunamadı: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Book not found: " + id));
         updatedBook.setTitle(dto.getTitle());
         updatedBook.setAuthor(dto.getAuthor());
         updatedBook.setPrice(dto.getPrice());
@@ -57,7 +58,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public void deleteBook(Long id) {
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Silinecek kitap bulunamadı: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Book not found: " + id));
         bookRepository.delete(book);
     }
 }

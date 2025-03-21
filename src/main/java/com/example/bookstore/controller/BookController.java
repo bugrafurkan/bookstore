@@ -1,7 +1,6 @@
 package com.example.bookstore.controller;
 
 import com.example.bookstore.dto.BookDTO;
-import com.example.bookstore.entity.Book;
 import com.example.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/books")
 public class BookController {
-    private static final String BASE_URL = "/api/v1/books/";
+
     private final BookService bookService;
 
     @Autowired
@@ -27,28 +26,28 @@ public class BookController {
         return new ResponseEntity<>(createdBook, HttpStatus.CREATED);
     }
 
-    // [GET] /api/v1/books/{id} - Tekil kitap getirme
+    // [GET] /api/v1/books/{id}
     @GetMapping("/{id}")
     public ResponseEntity<BookDTO>  getBook(@PathVariable Long id) {
         BookDTO book = bookService.getBook(id);
         return ResponseEntity.ok(book);
     }
 
-    // [GET] /api/v1/books - Tüm kitapları listeleme
+    // [GET] /api/v1/books
     @GetMapping
     public ResponseEntity<List<BookDTO>>  listBooks() {
         List<BookDTO> books = bookService.listBooks();
         return ResponseEntity.ok(books);
     }
 
-    // [PUT] /api/v1/books/{id} - Kitap güncelleme
+    // [PUT] /api/v1/books/{id}
     @PutMapping("/{id}")
     public ResponseEntity<BookDTO>  updateBook(@PathVariable Long id, @RequestBody BookDTO bookDTO) {
         BookDTO updatedBook = bookService.updateBook(id,bookDTO);
         return ResponseEntity.ok(updatedBook);
     }
 
-    // [DELETE] /api/v1/books/{id} - Kitap silme
+    // [DELETE] /api/v1/books/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<BookDTO>  deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);

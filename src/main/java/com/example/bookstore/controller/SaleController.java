@@ -38,8 +38,8 @@ public class SaleController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<SaleDTO>> findSalesByBuyerEmail(@PathVariable String buyerEmail) {
-        List<SaleDTO> salesForBuyer = saleService.getAllSalesByBuyerEmail(buyerEmail);
+    public ResponseEntity<List<SaleDTO>> findSalesByBuyerEmail(@PathVariable String buyerMail) {
+        List<SaleDTO> salesForBuyer = saleService.getAllSalesByBuyerEmail(buyerMail);
         return ResponseEntity.ok(salesForBuyer);
     }
 
